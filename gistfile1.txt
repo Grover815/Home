@@ -1,0 +1,44 @@
+using System;
+using System.Text;
+					
+public class Program
+{
+	string userresponse = Console.ReadLine();
+	static void In()
+	{
+		Console.WriteLine("Acess Granted");
+	}
+	
+	static void Out()
+	{
+		Console.WriteLine("Acess Denied");
+	}
+	
+	static void Encrypt(string value)
+	{
+		string finalKey = string.Empty;
+		byte[] encode = new byte[value.Length];
+		encode = Encoding.UTF8.GetBytes(value);
+		finalKey = Convert.ToBase64String(encode);
+
+		var value2 = Console.ReadLine();
+		string finalKey2 = string.Empty;
+		byte[] encode2 = new byte[value2.Length];
+		encode = Encoding.UTF8.GetBytes(value2);
+		finalKey2 = Convert.ToBase64String(encode);
+		string decrpted = finalKey2;
+		
+		if (finalKey == finalKey2)
+		{
+			In();
+		}else
+		{
+			Out();
+		}
+	}
+		
+	public static void Main()
+	{
+		Encrypt("Ufo");
+	}
+}
