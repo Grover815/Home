@@ -1,0 +1,55 @@
+task Display
+{
+  while(true)
+  {
+  	displayTextLine(1, "Left Motor: %d", nMotorEncoder[left]);
+    displayTextLine(2, "Right Motor: %d", nMotorEncoder[right]);
+  }
+}
+
+void fwd (int dis)
+{
+  nMotorEncoder[right] = nMotorEncoder[left] = 0;
+  while (nMotorEncoder[right] < dis) 
+  {
+    motor[left] = motor[right] = 50;
+  }
+  motor[left] = motor[right] = 0;
+}
+
+void back (int dis)
+{
+  while (nMotorEncoder[right] > dis)
+  {
+      nMotorEncoder[right] = nMotorEncoder[left] = 0; 
+  }
+  motor[left] = motor[right] = 0; 
+}
+
+void turnRight(void)
+{
+  nMotorEncoder[right] = nMotorEncoder[left] = 0; 
+  motor[left] = 50;
+  wait1Msec(1000);
+  motor[left] = 0;
+}
+
+void turnLeft(void)
+{
+  nMotorEncoder[right] = nMotorEncoder[left] = 0; 
+  motor[right] = 50;
+  wait(1000);
+  motor[right] = 0; 
+}
+
+task main
+{
+  clearDebugStream();
+  startTask(Display);
+  fwd();
+  turnLeft();
+  fwd();
+  back(3000);
+  turnLeft();
+
+}

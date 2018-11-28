@@ -1,0 +1,13 @@
+task Display
+{
+  while(true)
+  {
+  	displayTextLine(1, "Left Motor: %d", nMotorEncoder[left]);
+    displayTextLine(2, "Right Motor: %d", nMotorEncoder[right]);
+  }
+}
+
+task main
+{
+	startTask(Display);
+}
